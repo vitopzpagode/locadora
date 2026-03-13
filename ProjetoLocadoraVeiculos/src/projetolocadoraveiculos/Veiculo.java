@@ -14,8 +14,10 @@ public abstract class Veiculo {
         this.diariaBase = diariaBase;
     }
 
+    // Cada subclasse deve implementar sua forma de calcular a diária
     public abstract double calcularDiaria();
 
+    // Exibe detalhes do veículo
     public void exibirDetalhes() {
         System.out.println("Modelo: " + modelo);
         System.out.println("Marca: " + marca);
@@ -23,11 +25,13 @@ public abstract class Veiculo {
         System.out.println("Diária base: R$ " + diariaBase);
     }
 
+    // Getters
     public String getModelo() {
         return modelo;
     }
 
-    double diariaBase() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    // Retorna a diária base (corrigido para não lançar exceção)
+    public double diariaBase() {
+        return diariaBase;
     }
 }

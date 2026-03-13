@@ -1,4 +1,3 @@
-
 package projetolocadoraveiculos;
 
 import java.util.ArrayList;
@@ -7,7 +6,7 @@ import java.util.Scanner;
 public class ProjetoLocadoraVeiculos {
 
     public static void main(String[] args) {
-          Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         ArrayList<Cliente> clientes = new ArrayList<>();
         ArrayList<Veiculo> veiculos = new ArrayList<>();
         ArrayList<Locacao> locacoes = new ArrayList<>();
@@ -104,25 +103,47 @@ public class ProjetoLocadoraVeiculos {
                     break;
 
                 case 5:
+
+        
                     if (clientes.isEmpty() || veiculos.isEmpty()) {
                         System.out.println("Cadastre pelo menos um cliente e um veículo primeiro!");
                         break;
                     }
-                    System.out.println("Escolha o cliente (ID):");
-                    for (int i = 0; i < clientes.size(); i++) {
-                        System.out.println(i + ": " + clientes.get(i).getNome());
-                    }
-                    int idCliente = sc.nextInt();
-                    System.out.println("Escolha o veículo (ID):");
-                    for (int i = 0; i < veiculos.size(); i++) {
-                        System.out.println(i + ": " + veiculos.get(i).getModelo());
-                    }
-                    int idVeiculo = sc.nextInt();
+
+                    int idCliente = -1;
+                    int idVeiculo = -1;
+
+                    // Escolher cliente com validação
+                    do {
+                        System.out.println("Escolha o cliente (ID):");
+                        for (int i = 0; i < clientes.size(); i++) {
+                            System.out.println(i + ": " + clientes.get(i).getNome());
+                        }
+                        idCliente = sc.nextInt();
+                        if (idCliente < 0 || idCliente >= clientes.size()) {
+                            System.out.println("ID inválido! Tente novamente.");
+                        }
+                    } while (idCliente < 0 || idCliente >= clientes.size());
+
+                    // Escolher veículo com validação
+                    do {
+                        System.out.println("Escolha o veículo (ID):");
+                        for (int i = 0; i < veiculos.size(); i++) {
+                            System.out.println(i + ": " + veiculos.get(i).getModelo());
+                        }
+                        idVeiculo = sc.nextInt();
+                        if (idVeiculo < 0 || idVeiculo >= veiculos.size()) {
+                            System.out.println("ID inválido! Tente novamente.");
+                        }
+                    } while (idVeiculo < 0 || idVeiculo >= veiculos.size());
+
                     System.out.print("Quantidade de dias: ");
                     int dias = sc.nextInt();
-                    sc.nextLine();
+                    sc.nextLine(); // limpar buffer
+
                     Locacao loc = new Locacao(clientes.get(idCliente), veiculos.get(idVeiculo), dias);
                     locacoes.add(loc);
+
                     System.out.println("Locação realizada com sucesso!");
                     loc.exibirLocacao();
                     break;
